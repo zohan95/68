@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('add/', api_add),
     path('substract/', api_sub),
-    path('multiply', api_mult),
-    path('divide/', api_div)
+    path('multiply/', api_mult),
+    path('divide/', api_div),
+    path('', index)
 ]

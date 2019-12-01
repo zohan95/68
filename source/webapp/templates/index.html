@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+   <script src="{% static 'js/jquery.js' %}"></script>
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="first-input">
+<input type="text" id="second-input">
+<button data-res="add" onclick="func(this);">Add</button>
+<button data-res="substract" onclick="func(this);">Sub</button>
+<button data-res="multiply" onclick="func(this);">Mult</button>
+<button data-res="divide" onclick="func(this);">Div</button>
+
+<div>
+
+</div>
+
+<script type="text/javascript">
+    function func(d) {
+        let operType = d.getAttribute('data-res');
+        var a = document.getElementById('first-input').value;
+        var b = document.getElementById('second-input').value;
+        $.ajax({
+        url: "http://127.0.0.1:8000/"+operType+'/',
+        method: 'post',
+        dataType: "json",
+        contentType: "application/json",
+        data: JSON.stringify({A: a, B: b}),
+        success : function (response) {
+            let myDiv = $('div');
+            myDiv.empty();
+            myDiv.css('margin-top', '20px');
+            myDiv.css('border','1px solid green');
+            myDiv.append('Answer:'+response.answer);
+        },
+        error: function(response) {
+            let myDiv = $('div');
+            myDiv.empty();
+            myDiv.css('margin-top', '20px');
+            myDiv.css('border','1px solid red');
+            myDiv.append('Error');
+        }
+        });
+    }
+</script>
+</body>
+</html>
