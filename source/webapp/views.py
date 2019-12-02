@@ -50,9 +50,14 @@ def api_div(request):
         request_data = json.loads(request.body)
     a = int(request_data['A'])
     b = int(request_data['B'])
-    data = {
-        'answer': a / b
-    }
+    if b==0:
+        data = {
+            'Error': "Division by zero!"
+        }
+    else:
+        data = {
+            'answer': a / b
+        }
     return JsonResponse(data)
 
 

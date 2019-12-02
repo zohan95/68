@@ -32,9 +32,17 @@
         success : function (response) {
             let myDiv = $('div');
             myDiv.empty();
-            myDiv.css('margin-top', '20px');
-            myDiv.css('border','1px solid green');
-            myDiv.append('Answer:'+response.answer);
+            if (response.answer!=undefined){
+                myDiv.css('margin-top', '20px');
+                myDiv.css('border','1px solid green');
+                myDiv.append('Answer:'+response.answer);
+            }
+            else {
+                myDiv.css('margin-top', '20px');
+                myDiv.css('border','1px solid red');
+                myDiv.append('Error: '+response.Error);
+            }
+
         },
         error: function(response) {
             let myDiv = $('div');
